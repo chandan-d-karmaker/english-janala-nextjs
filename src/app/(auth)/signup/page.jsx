@@ -1,0 +1,46 @@
+'use client'
+import { authClient } from '@/lib/auth-client';
+import Link from 'next/link';
+import React from 'react';
+
+const SignUpPage = () => {
+
+    const handleSignup =  async (e) =>{
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const userData = Object.fromEntries(formData.entries());
+        const { data, error } = await authClient.signUp.email({
+            ...userData,
+
+            callbackURL: "/mainpage",
+        });
+        console.log("Signup data:", {data, error})
+    }
+
+
+    return (
+        <div className='flex justify-center items-center h-screen'>
+            <form onSubmit={handleSignup} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+
+                <legend className="fieldset-legend">Sign Up</legend>
+
+                <label className="label">Name</label>
+                <input name='name' type="text" className="input" placeholder="Name" />
+
+                <label className="label">Email</label>
+                <input name='email' type="email" className="input" placeholder="Email" />
+
+                <label className="label">Password</label>
+                <input name='password' type="password" className="input" placeholder="Password" />
+
+                <button className="btn btn-neutral mt-4">Login</button>
+
+                <div className='text-center mt-4'>
+                    <p>Already a member?  <Link href={'/auth/login'} className='font-semibold text-red-500'>login now</Link> </p>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+export default SignUpPage;
