@@ -35,10 +35,10 @@ const SignUpPage = () => {
                 <label className="label">Password</label>
                 <input name='password' type="password" className="input" placeholder="Password" />
 
-                <button className="btn btn-neutral mt-4">Login</button>
+                <button className="btn btn-neutral mt-4">Sign up</button>
 
                 <div className='text-center mt-4'>
-                    <p>Already a member?  <Link href={'/auth/login'} className='font-semibold text-red-500'>login now</Link> </p>
+                    <p>Already a member?  <Link href={'/login'} className='font-semibold text-red-500'>login now</Link> </p>
                 </div>
             </form>
         </div>
