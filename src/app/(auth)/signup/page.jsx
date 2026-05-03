@@ -15,6 +15,8 @@ const SignUpPage = () => {
             callbackURL: "/mainpage",
         });
         console.log("Signup data:", {data, error})
+
+        window.location.href='/mainpage'
     }
 
 
