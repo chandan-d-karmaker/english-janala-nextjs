@@ -3,12 +3,18 @@ import React from 'react';
 import logo from '../../assets/logo.png'
 import Image from 'next/image';
 import Link from 'next/link';
-import { signOut, useSession } from '@/lib/auth-client';
+import { authClient, signOut } from '@/lib/auth-client';
 
 const NavBar = () => {
 
-    const { data } = useSession();
-    console.log(data)
+    const { data: session } = authClient.useSession();
+    console.log(session);
+    const user = session?.user;
+    console.log(user)
+
+    const handleSignOut = async()=>{
+        await authClient.signOut();
+    }
 
     return (
         <div>
@@ -42,7 +48,7 @@ const NavBar = () => {
                     <Link href={'/faq'} className="btn btn-primary btn-outline">FAQ</Link>
 
                     {
-                        data ? <button onClick={() => signOut()} className="btn btn-primary btn-outline">Logout</button> :
+                        user ? <button onClick={handleSignOut} className="btn btn-primary btn-outline">Logout</button> :
                             <Link href={'/login'} className="btn btn-primary btn-outline">Login</Link>
                     }
 

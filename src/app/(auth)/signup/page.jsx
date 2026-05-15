@@ -1,6 +1,7 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 const SignUpPage = () => {
@@ -14,9 +15,15 @@ const SignUpPage = () => {
 
             callbackURL: "/mainpage",
         });
-        console.log("Signup data:", {data, error})
+         console.log('signup data: ', { data, error });
 
-        window.location.href='/mainpage'
+        if (data) {
+            redirect('/mainpage');
+
+        }
+        if (error) {
+            alert(error);
+        }
     }
 
 

@@ -1,9 +1,8 @@
-import dns from 'node:dns/promises';
-dns.setDefaultResultOrder("ipv4first");
+const dns = require("node:dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +16,10 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "English Janala",
-  description: "Keep up your english journey",
+  description: "Learn English vocabulary with interactive lessons",
+  icons: {
+    icon: "/assets/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
